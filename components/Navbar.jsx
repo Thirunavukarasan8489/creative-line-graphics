@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Printer, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -69,7 +70,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-border/70 transition-all ${
+      className={`sticky top-0 z-[70] border-b border-border/70 transition-all ${
         scrolled ? "bg-background/70 shadow-lg backdrop-blur-xl" : "bg-background/95"
       }`}
     >
@@ -106,36 +107,52 @@ export default function Navbar() {
         </button>
       </div>
 
-      {open && (
-        <div className="fixed inset-0 z-60 md:hidden">
-          <div className="absolute inset-0 bg-slate-950/55" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-72 border-l border-border bg-card p-5 shadow-2xl">
-            <div className="mb-8 flex items-center justify-between">
-              <span className="text-sm font-semibold">Menu</span>
-              <button
-                type="button"
-                className="rounded-xl border border-border p-2"
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+      <AnimatePresence>
+        {open && (
+          <div className="fixed inset-0 z-[90] md:hidden">
+            <motion.div
+              aria-hidden="true"
+              className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute right-0 top-0 h-dvh w-72 border-l border-border bg-background p-5 shadow-2xl"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <span className="text-sm font-semibold">Menu</span>
+                <button
+                  type="button"
+                  className="rounded-xl border border-border p-2"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a key={link.href} href={link.href} className="nav-link" onClick={() => setOpen(false)}>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-            <button onClick={cycleTheme} type="button" className="theme-toggle mt-4 w-full justify-center">
-              {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              <span>{themeLabel} mode</span>
-            </button>
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <a key={link.href} href={link.href} className="nav-link" onClick={() => setOpen(false)}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+              <button onClick={cycleTheme} type="button" className="theme-toggle mt-4 w-full justify-center">
+                {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                <span>{themeLabel} mode</span>
+              </button>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </header>
   );
 }

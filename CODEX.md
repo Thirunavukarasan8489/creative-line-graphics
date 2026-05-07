@@ -31,6 +31,14 @@ Completed redesign implementation based on `REDESIGN.md`.
 17. Image optimization applied using `next/image` in major content sections.
 18. Typography updated to `Poppins` via `next/font/google`.
 19. Installed `framer-motion` and applied fade/slide/float animations across sections.
+20. Fixed mobile navbar drawer visibility and animation:
+   - Corrected mobile overlay stacking/layering (`z-[60]`) so backdrop appears properly
+   - Added smooth fade-in/fade-out backdrop animation
+   - Added smooth slide-in/slide-out drawer animation on hamburger open/close
+21. Fixed remaining mobile menu backdrop bug when page is scrolled:
+   - Increased navbar/menu stacking order (`z-[70]` header, `z-[90]` drawer layer)
+   - Switched backdrop to dedicated full-screen animated overlay (`motion.div`)
+   - Set drawer to full viewport height (`h-dvh`) with solid `bg-background` to avoid transparency artifacts
 
 ## Files Updated
 
