@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Brand helpers (magenta + sky like your card) */
+:root {
+  --brand: #a21caf; /* fuchsia-700 */
+  --brand-600: #c026d3; /* fuchsia-600 */
+  --accent: #0ea5e9; /* sky-500 */
+}
+
+/* Smooth default font */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  @apply text-zinc-800 bg-white;
+}
+
+/* Reusable utilities */
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold;
+}
+.btn-brand {
+  @apply bg-[var(--brand)] text-white hover:bg-[var(--brand-600)] transition;
+}
+.btn-ghost {
+  @apply border border-zinc-200 hover:bg-zinc-50;
+}
+.section {
+  @apply py-16 sm:py-20;
+}
+.container {
+  @apply max-w-6xl mx-auto px-4;
+}
+.card {
+  @apply rounded-2xl border border-zinc-200 bg-white shadow-sm;
+}
+.badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-fuchsia-50 text-fuchsia-700;
+}
+/* === Reveal on scroll (no libraries) === */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-100 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-200 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-300 {
+  transition-delay: 0.3s;
+}
+
+/* === Fancy button shimmer === */
+.btn-bling {
+  position: relative;
+  overflow: hidden;
+}
+.btn-bling::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -150%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s;
+}
+.btn-bling:hover::after {
+  left: 150%;
+}
+
+/* === Gradient ring on hover for cards === */
+.hover-ring {
+  position: relative;
+}
+.hover-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  background: conic-gradient(from 180deg at 50% 50%, #c026d3, #0ea5e9, #c026d3);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.hover-ring:hover::before {
+  opacity: 0.35;
+}
+.hover-ring > .inner {
+  position: relative;
+  border-radius: 1rem;
+  background: white;
+}
+
+/* subtle float on hover */
+.floaty {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.floaty:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 32px -20px rgba(0, 0, 0, 0.25);
+}
