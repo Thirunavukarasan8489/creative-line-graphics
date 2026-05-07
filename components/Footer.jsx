@@ -1,64 +1,65 @@
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+
+const quickLinks = [
+  ["Home", "#home"],
+  ["Services", "#services"],
+  ["About", "#about"],
+  ["Contact", "#contact"],
+];
+
+const serviceLinks = [
+  "Bill Books Printing",
+  "Visiting Cards",
+  "Flex Banners",
+  "Wedding Invitations",
+  "Labels & Tags",
+  "Binding Works",
+];
+
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-200 bg-zinc-50">
-      <div className="container py-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-border bg-section-bg">
+      <div className="section-wrap grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <img src="/logo.svg" alt="" className="h-6 mb-3" />
-          <p className="text-sm text-zinc-600">
-            Designing & Printing Services — Offset & Screen Printing.
+          <h3 className="text-lg font-bold">Creative Line Graphics</h3>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Premium printing services with quality materials, modern design, and dependable delivery.
           </p>
-          <div className="mt-3">
-            <img
-              src="/visiting-card.jpg"
-              alt="Visiting card"
-              className="rounded-lg border w-56"
-            />
+          <div className="mt-4 flex gap-2">
+            <a href="#" className="rounded-lg border border-border p-2" aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
+            <a href="#" className="rounded-lg border border-border p-2" aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
           </div>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-3">Services</h4>
-          <ul className="space-y-2 text-sm">
-            <li>Bill Book & Delivery Challan</li>
-            <li>Invitations & Visiting Cards</li>
-            <li>Tags & Labels (Clothing)</li>
-            <li>Custom T-Shirt Printing</li>
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Quick Links</h4>
+          <ul className="mt-4 space-y-2 text-sm">
+            {quickLinks.map(([label, href]) => (
+              <li key={label}><a href={href} className="transition hover:text-primary">{label}</a></li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-3">Contact</h4>
-          <p className="text-sm">
-            <span className="font-medium">D.P. Ayyadurai</span>
-            <br />
-            <a href="tel:+919344216902" className="underline">
-              +91 93442 16902
-            </a>
-            <br />
-            <a href="tel:+918489902902" className="underline">
-              +91 84899 02902
-            </a>
-            <br />
-            <a className="underline" href="mailto:creativetpr@gmail.com">
-              creativetpr@gmail.com
-            </a>
-          </p>
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Services</h4>
+          <ul className="mt-4 space-y-2 text-sm">
+            {serviceLinks.map((label) => (
+              <li key={label}>{label}</li>
+            ))}
+          </ul>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-3">Address</h4>
-          <p className="text-sm">
-            No.63, ABT Main Road, Karuvampalayam,
-            <br /> Tirupur – 641 604.
-          </p>
-          <a className="btn btn-ghost mt-3" href="/catalog.pdf" download>
-            Download Catalog
-          </a>
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Contact</h4>
+          <div className="mt-4 space-y-3 text-sm">
+            <p className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-primary" /> No.63, ABT Main Road, Karuvampalayam, Tirupur - 641604</p>
+            <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> +91 93442 16902</p>
+            <p className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> creativetpr@gmail.com</p>
+          </div>
         </div>
       </div>
-      <div className="border-t border-zinc-200 py-4 text-center text-xs text-zinc-500">
-        © {new Date().getFullYear()} Creative Line Graphics. All rights
-        reserved.
+      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
+        Copyright {new Date().getFullYear()} Creative Line Graphics. All rights reserved.
       </div>
     </footer>
   );
